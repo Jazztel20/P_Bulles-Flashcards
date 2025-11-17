@@ -36,6 +36,7 @@ td {
 }
 
 .containerOptions a,
+.containerOptions form,
 .user-head a {
   text-decoration: none;
   height: 100%;
@@ -137,10 +138,56 @@ label {
 }
 
 .btn-logout {
-  text-decoration: none;
   background-color: coral;
+  padding: 20px;
+  margin: 10px;
+}
+
+.text-danger {
+  color: red;
+}
+
+.alert {
+  padding: 15px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.field {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.radio {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.actions {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 30%;
+}
+
+.actions a,
+.action form {
+  text-decoration: none;
+  height: 100%;
+  margin-left: 1vw;
 }
