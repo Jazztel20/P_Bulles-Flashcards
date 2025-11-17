@@ -1,9 +1,6 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
-
 export default class extends BaseSchema {
   protected tableName = 't_teacher'
-  schema: any
-
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
@@ -23,7 +20,6 @@ export default class extends BaseSchema {
       table.timestamp('updated_at')
     })
   }
-
   async down() {
     this.schema.dropTable(this.tableName)
   }

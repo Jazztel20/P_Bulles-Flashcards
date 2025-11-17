@@ -1,5 +1,4 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
-
 export default class extends BaseSchema {
   protected tableName = 't_section'
 
@@ -11,7 +10,6 @@ export default class extends BaseSchema {
       table.timestamp('updated_at')
     })
   }
-
   async down() {
     this.schema.dropTable(this.tableName)
   }
