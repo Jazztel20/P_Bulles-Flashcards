@@ -7,6 +7,7 @@
 |
 */
 
+import AuthController from '#controllers/auth_controller'
 import TeachersController from '#controllers/teachers_controller'
 import router from '@adonisjs/core/services/router'
 
@@ -28,3 +29,6 @@ router.get('/teacher/:id/edit', [TeachersController, 'edit']).as('teacher.edit')
 
 // Route permettant la modification de l'enseignant
 router.post('/teacher/:id/update', [TeachersController, 'update']).as('teacher.update')
+
+// Route permettant de se connecter
+router.post('/login', [AuthController, 'handleLogin']).as('auth.handleLogin')
