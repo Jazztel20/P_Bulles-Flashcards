@@ -29,7 +29,13 @@ export default class TeachersController {
   /**
    * Show individual record
    */
-  async show({}: HttpContext) {}
+  async show({ params, view }: HttpContext) {
+    // Sélectionner l'enseignant dont on veut afficher les détails
+    // On veut également pouvoir afficher la section de l'enseignant
+    const teacher = await Teacher.query().where('id', params.id).preload('section').firstOrFail()
+    // Afficher la vue
+    return view.render('pages/teachers/show.edge', { title: "Détail d'un enseignant", teacher })
+  }
 
   /**
    * Edit individual record
