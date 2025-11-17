@@ -27,8 +27,8 @@
               {{ teacher.nickname }}
             </td>
             <td class="containerOptions">
-              <a href="#">
-                <img height="20em" src="./img/edit.png" alt="edit" />
+              <a href="{{ route('teacher.edit', {id: teacher.id}) }}">
+                <img height="20em" src="/img/edit.png" alt="edit" />
               </a>
               <form
                 action="{{ route('teacher.destroy', { id: teacher.id }) }}?_method=DELETE"
