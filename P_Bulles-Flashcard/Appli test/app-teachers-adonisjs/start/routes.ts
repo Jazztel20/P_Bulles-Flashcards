@@ -10,28 +10,60 @@
 import AuthController from '#controllers/auth_controller'
 import TeachersController from '#controllers/teachers_controller'
 import router from '@adonisjs/core/services/router'
+import { middleware } from './kernel.js'
 
 router.get('/', [TeachersController, 'index']).as('home')
+
 // Route permettant de voir les détails d'un enseignant
-router.get('/teacher/:id/show', [TeachersController, 'show']).as('teacher.show')
+router
+  .get('/teacher/:id/show', [TeachersController, 'show'])
+  .as('teacher.show')
+  .use(middleware.auth())
 
 // Route permettant de supprimer un enseignant
-router.delete('/teacher/:id/destroy', [TeachersController, 'destroy']).as('teacher.destroy')
+router
+  .delete('/teacher/:id/destroy', [TeachersController, 'destroy'])
+  .as('teacher.destroy')
+  .use(middleware.auth())
+  .use(middleware.ensureAdmin())
 
 // Route permettant d'afficher le formulaire permettant l'ajout d'un enseignant
-router.get('/teacher/add', [TeachersController, 'create']).as('teacher.create')
+router
+  .get('/teacher/add', [TeachersController, 'create'])
+  .as('teacher.create')
+  .use(middleware.auth())
+  .use(middleware.ensureAdmin())
 
 // Route permettant l'ajout de l'enseignant
-router.post('/teacher/add', [TeachersController, 'store']).as('teacher.store')
+router
+  .post('/teacher/add', [TeachersController, 'store'])
+  .as('teacher.store')
+  .use(middleware.auth())
+  .use(middleware.ensureAdmin())
 
 // Route permettant d'afficher le formulaire permettant la mise à jour d'un enseignant
-router.get('/teacher/:id/edit', [TeachersController, 'edit']).as('teacher.edit')
+router
+  .get('/teacher/:id/edit', [TeachersController, 'edit'])
+  .as('teacher.edit')
+  .use(middleware.auth())
+  .use(middleware.ensureAdmin())
 
 // Route permettant la modification de l'enseignant
-router.post('/teacher/:id/update', [TeachersController, 'update']).as('teacher.update')
+router
+  .post('/teacher/:id/update', [TeachersController, 'update'])
+  .as('teacher.update')
+  .use(middleware.auth())
+  .use(middleware.ensureAdmin())
 
 // Route permettant de se connecter
-router.post('/login', [AuthController, 'handleLogin']).as('auth.handleLogin')
+router
+  .post('/login', [AuthController, 'handleLogin'])
+  .as('auth.handleLogin')
+  .use(middleware.guest())
+  .use(middleware.guest())
 
 // Route permettant de se déconnecter
-router.post('/logout', [AuthController, 'handleLogout']).as('auth.handleLogout')
+router
+  .post('/logout', [AuthController, 'handleLogout'])
+  .as('auth.handleLogout')
+  .use(middleware.auth())
