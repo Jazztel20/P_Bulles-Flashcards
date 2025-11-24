@@ -32,3 +32,6 @@ router.post('/teacher/:id/update', [TeachersController, 'update']).as('teacher.u
 
 // Route permettant de se connecter
 router.post('/login', [AuthController, 'handleLogin']).as('auth.handleLogin')
+
+// Route permettant de se déconnecter
+router.post('/logout', [AuthController, 'handleLogout']).as('auth.handleLogout')
