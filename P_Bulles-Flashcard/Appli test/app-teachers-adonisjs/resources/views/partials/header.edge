@@ -16,10 +16,8 @@
       @else
         <form action="{{ route('auth.handleLogin') }}" method="post">
           {{ csrfField() }}
-          @!component('components/input', { name: 'username', label: "Nom
-          d'utilisateur"})
-          @!component('components/input', { name: 'password', label: 'Mot de
-          passe', type: 'password'})
+          @!component('./components/input', { name: 'username', label: 'Nom d\'utilisateur'})
+          @!component('./components/input', { name: 'password', label: 'Mot de passe', type: 'password'})
           <button type="submit" class="btn btn-login">Se connecter</button>
         </form>
       @endif
