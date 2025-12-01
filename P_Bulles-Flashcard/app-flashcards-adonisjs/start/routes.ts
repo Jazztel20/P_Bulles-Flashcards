@@ -9,4 +9,6 @@
 
 import router from '@adonisjs/core/services/router'
 
+const DecksController = () => import('#controllers/decks_controller')
+
 router.on('/').render('pages/home')
