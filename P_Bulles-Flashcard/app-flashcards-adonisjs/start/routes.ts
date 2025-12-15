@@ -19,6 +19,6 @@ router.post('/decks', [DecksController, 'store']).as('decks.store')
 router.get('/decks/:id', [DecksController, 'show']).as('decks.show')
 
 router.get('/decks/:id/edit', [DecksController, 'edit']).as('decks.edit')
-router.put('/decks/:id', [DecksController, 'update']).as('decks.update')
+router.post('/decks/:id/update', [DecksController, 'update']).as('decks.updatePost')
 
 router.post('/decks/:id/delete', [DecksController, 'destroy']).as('decks.destroyPost')
