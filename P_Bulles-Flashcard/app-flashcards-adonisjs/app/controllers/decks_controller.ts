@@ -13,30 +13,43 @@ export default class DecksController {
   /**
    * Display form to create a new record
    */
-  async create({}: HttpContext) {}
+  async create({ view }: HttpContext) {
+    return view.render('pages/decks/create')
+  }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request, response }: HttpContext) {
+    const data = request.only(['title', 'description'])
+
+    await Deck.create({
+      title: data.title,
+      description: data.description ?? null,
+      isPublished: false,
+      // userId: null
+    })
+
+    return response.redirect('/')
+  }
 
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  async show({}: HttpContext) {}
 
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  async edit({}: HttpContext) {}
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({}: HttpContext) {}
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({}: HttpContext) {}
 }
