@@ -43,10 +43,9 @@
         </a>
 
         <!-- DELETE -->
-        <form action="{{ route('decks.destroy', { id: deck.id }) }}" method="post" style="display:inline;"
+        <form action="{{ route('decks.destroyPost', { id: deck.id }) }}" method="post" style="display:inline;"
           onsubmit="return confirm('Supprimer ce deck ?');">
           {{ csrfField() }}
-          <input type="hidden" name="_method" value="DELETE" />
 
           <button type="submit" style="border:none;background:transparent;cursor:pointer;">
             <img height="20em" src="/img/delete.png" alt="delete" />
