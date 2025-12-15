@@ -1,0 +1,15 @@
+@component('components/layout', { title: deck.title })
+
+<h3>{{ deck.title }}</h3>
+
+<p>
+    {{ deck.description || 'Aucune description.' }}
+</p>
+
+<div>
+    <a href="{{ route('decks.edit', { id: deck.id }) }}">Modifier</a>
+    |
+    <a href="{{ route('decks.index') }}">Retour</a>
+</div>
+
+@endcomponent

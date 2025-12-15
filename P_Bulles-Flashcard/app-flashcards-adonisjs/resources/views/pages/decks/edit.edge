@@ -1,0 +1,26 @@
+@component('components/layout', { title: 'Modifier un deck' })
+
+<h3>Modifier un deck</h3>
+
+<form action="{{ route('decks.update', { id: deck.id }) }}" method="post">
+    {{ csrfField() }}
+    <input type="hidden" name="_method" value="PUT" />
+
+    <div>
+        <label for="title">Titre</label>
+        <input id="title" name="title" type="text" value="{{ deck.title }}" required />
+    </div>
+
+    <div>
+        <label for="description">Description</label>
+        <textarea id="description" name="description">{{ deck.description }}</textarea>
+    </div>
+
+    <button type="submit">Enregistrer</button>
+</form>
+
+<p>
+    <a href="{{ route('decks.index') }}">Retour</a>
+</p>
+
+@endcomponent
