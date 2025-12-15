@@ -13,14 +13,14 @@ export default class DecksController {
   /**
    * Display form to create a new record
    */
-  async create({ view }: HttpContext) {
+  public async create({ view }: HttpContext) {
     return view.render('pages/decks/create')
   }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request, response }: HttpContext) {
+  public async store({ request, response }: HttpContext) {
     const data = request.only(['title', 'description'])
 
     await Deck.create({
@@ -36,7 +36,7 @@ export default class DecksController {
   /**
    * Show individual record
    */
-  async show({ params, view }: HttpContext) {
+  public async show({ params, view }: HttpContext) {
     const deck = await Deck.findOrFail(params.id)
     return view.render('pages/decks/show', { deck })
   }
@@ -44,7 +44,7 @@ export default class DecksController {
   /**
    * Edit individual record
    */
-  async edit({ params, view }: HttpContext) {
+  public async edit({ params, view }: HttpContext) {
     const deck = await Deck.findOrFail(params.id)
     return view.render('pages/decks/edit', { deck })
   }
