@@ -1,0 +1,32 @@
+@component('components/layout', { title: 'Ajouter un deck' })
+
+  <h3>Ajouter un deck</h3>
+
+  <form action="{{ route('decks.store') }}" method="post">
+    {{ csrfField() }}
+
+    <div>
+      <label for="title">Titre</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+      ></textarea>
+    </div>
+
+    <button type="submit">
+      Créer le deck
+    </button>
+
+  </form>
+
+@endcomponent
