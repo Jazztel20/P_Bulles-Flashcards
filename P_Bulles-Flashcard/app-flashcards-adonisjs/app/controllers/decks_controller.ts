@@ -1,4 +1,5 @@
 import Deck from '#models/deck'
+import { createDeckValidator, updateDeckValidator } from '#validators/deck'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class DecksController {
@@ -21,7 +22,7 @@ export default class DecksController {
    * Handle form submission for the create action
    */
   public async store({ request, response }: HttpContext) {
-    const data = request.only(['title', 'description'])
+    const data = await request.validateUsing(createDeckValidator)
 
     await Deck.create({
       title: data.title,
@@ -54,7 +55,7 @@ export default class DecksController {
    */
   public async update({ params, request, response }: HttpContext) {
     const deck = await Deck.findOrFail(params.id)
-    const data = request.only(['title', 'description'])
+    const data = await request.validateUsing(updateDeckValidator)
 
     deck.title = data.title
     deck.description = data.description ?? null
