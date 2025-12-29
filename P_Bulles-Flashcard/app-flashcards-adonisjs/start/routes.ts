@@ -36,3 +36,9 @@ router.get('/decks/:deckId/flashcards/:id/edit', [FlashcardsController, 'edit'])
 router.post('/decks/:deckId/flashcards/:id/update', [FlashcardsController, 'update']).as('flashcards.updatePost')
 
 router.post('/decks/:deckId/flashcards/:id/delete', [FlashcardsController, 'destroy']).as('flashcards.destroyPost')
+
+
+router.post('/decks/:id/publish', [DecksController, 'publish']).as('decks.publish')
+router.post('/decks/:id/unpublish', [DecksController, 'unpublish']).as('decks.unpublish')
+
+router.get('/decks/:id/play', [DecksController, 'play']).as('decks.play')
