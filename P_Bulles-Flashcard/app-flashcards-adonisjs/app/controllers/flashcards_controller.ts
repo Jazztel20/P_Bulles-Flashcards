@@ -49,16 +49,18 @@ export default class FlashcardsController {
   /**
    * Edit individual record
    */
-  public async edit({ params, view }: HttpContext) {
-    const deck = await Deck.findOrFail(params.deckId)
+public async edit({ params, view }: HttpContext) {
+  const deck = await Deck.findOrFail(params.deckId)
 
-    const card = await Flashcard.query()
-      .where('id', params.id)
-      .andWhere('deck_id', deck.id)
-      .firstOrFail()
+  const card = await deck
+    .related('flashcards')
+    .query()
+    .where('id', params.id)
+    .firstOrFail()
 
-    return view.render('pages/flashcards/edit', { deck, card })
-  }
+  return view.render('pages/flashcards/edit', { deck, card })
+}
+
 
   /**
    * Handle form submission for the edit action
