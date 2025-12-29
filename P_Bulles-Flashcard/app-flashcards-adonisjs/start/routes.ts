@@ -22,3 +22,17 @@ router.get('/decks/:id/edit', [DecksController, 'edit']).as('decks.edit')
 router.post('/decks/:id/update', [DecksController, 'update']).as('decks.updatePost')
 
 router.post('/decks/:id/delete', [DecksController, 'destroy']).as('decks.destroyPost')
+
+
+
+const FlashcardsController = () => import('#controllers/flashcards_controller')
+
+router.get('/decks/:deckId/flashcards', [FlashcardsController, 'index']).as('flashcards.index')
+
+router.get('/decks/:deckId/flashcards/create', [FlashcardsController, 'create']).as('flashcards.create')
+router.post('/decks/:deckId/flashcards', [FlashcardsController, 'store']).as('flashcards.store')
+
+router.get('/decks/:deckId/flashcards/:id/edit', [FlashcardsController, 'edit']).as('flashcards.edit')
+router.put('/decks/:deckId/flashcards/:id', [FlashcardsController, 'update']).as('flashcards.update')
+
+router.delete('/decks/:deckId/flashcards/:id', [FlashcardsController, 'destroy']).as('flashcards.destroy')
