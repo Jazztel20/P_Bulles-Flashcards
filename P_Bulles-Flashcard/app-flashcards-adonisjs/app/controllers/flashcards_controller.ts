@@ -7,18 +7,15 @@ export default class FlashcardsController {
   /**
    * Display a list of resource
    */
-  public async index({ params, view }: HttpContext) {
+  public async index({ params, view, auth }: HttpContext) {
     const deck = await Deck.findOrFail(params.deckId)
     await deck.load('flashcards')
-    return view.render('pages/flashcards/index', { deck })
+    return view.render('pages/flashcards/index', { deck, auth })
   }
 
-  /**
-   * Display form to create a new record
-   */
-  public async create({ params, view }: HttpContext) {
+  public async create({ params, view, auth }: HttpContext) {
     const deck = await Deck.findOrFail(params.deckId)
-    return view.render('pages/flashcards/create', { deck })
+    return view.render('pages/flashcards/create', { deck, auth })
   }
 
   /**
@@ -49,18 +46,14 @@ export default class FlashcardsController {
   /**
    * Edit individual record
    */
-public async edit({ params, view }: HttpContext) {
-  const deck = await Deck.findOrFail(params.deckId)
 
-  const card = await deck
-    .related('flashcards')
-    .query()
-    .where('id', params.id)
-    .firstOrFail()
+  public async edit({ params, view, auth }: HttpContext) {
+    const deck = await Deck.findOrFail(params.deckId)
 
-  return view.render('pages/flashcards/edit', { deck, card })
-}
+    const card = await deck.related('flashcards').query().where('id', params.id).firstOrFail()
 
+    return view.render('pages/flashcards/edit', { deck, card, auth })
+  }
 
   /**
    * Handle form submission for the edit action
