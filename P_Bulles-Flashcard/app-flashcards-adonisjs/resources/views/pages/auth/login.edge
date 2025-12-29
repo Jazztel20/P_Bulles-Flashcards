@@ -1,0 +1,25 @@
+@component('components/layout', { title: 'Connexion' })
+
+  <h3>Connexion</h3>
+
+  @if(flashMessages.get('error'))
+    <p class="error">{{ flashMessages.get('error') }}</p>
+  @endif
+
+  <form action="{{ route('auth.handleLogin') }}" method="post">
+    {{ csrfField() }}
+
+    <div>
+      <label for="username">Nom d’utilisateur</label>
+      <input id="username" name="username" type="text" required value="{{ old('username') || '' }}" />
+    </div>
+
+    <div>
+      <label for="password">Mot de passe</label>
+      <input id="password" name="password" type="password" required />
+    </div>
+
+    <button type="submit" class="btn btn-login">Se connecter</button>
+  </form>
+
+@endcomponent
