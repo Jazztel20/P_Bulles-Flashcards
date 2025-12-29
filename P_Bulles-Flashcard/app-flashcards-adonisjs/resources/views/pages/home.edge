@@ -1,65 +1,73 @@
 @component('components/layout', { title: 'Accueil' })
-<h3>
-  Liste des decks
-</h3>
+<h2>Liste des decks</h2>
 
 <table>
   <thead>
     <tr>
-      <th>
-        Titre
-      </th>
-      <th>
-        Description
-      </th>
-      <th>
-        Options
-      </th>
+      <th>#</th>
+      <th>Title</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     @if(decks.length === 0)
-    <tr>
-      <td colspan="3">
-        Aucun deck pour le moment.
-      </td>
-    </tr>
+      <tr>
+        <td colspan="3">Aucun deck pour le moment.</td>
+      </tr>
     @else
-    @each(deck in decks)
-    <tr>
-      <td>
-        {{ deck.title }}
-      </td>
+      @each(deck in decks)
+        <tr>
+          <td>{{ i }}</td>
+          <td>{{ deck.title }}</td>
+          
+          <td>
+            <!-- Modifier -->
+            <a href="{{ route('decks.edit', { id: deck.id }) }}">Modifier</a>
 
-      <td>
-        {{ deck.description || '-' }}
-      </td>
+            <!-- Supprimer -->
+            <form
+              action="{{ route('decks.destroyPost', { id: deck.id }) }}"
+              method="post"
+              style="display:inline;"
+              onsubmit="return confirm('Supprimer ce deck ?');"
+            >
+              {{ csrfField() }}
+              <button type="submit">Supprimer</button>
+            </form>
 
-      <td class="containerOptions">
-        <!-- EDIT -->
-        <a href="{{ route('decks.edit', { id: deck.id }) }}">
-          <img height="20em" src="/img/edit.png" alt="edit" />
-        </a>
+            <!-- Voir la liste des flashcards -->
+            <a href="{{ route('flashcards.index', { deckId: deck.id }) }}">Voir la liste des FlashCards</a>
 
-        <!-- DELETE -->
-        <form action="{{ route('decks.destroyPost', { id: deck.id }) }}" method="post" style="display:inline;"
-          onsubmit="return confirm('Supprimer ce deck ?');">
-          {{ csrfField() }}
+            <!-- Créer une nouvelle flashcard -->
+            <a href="{{ route('flashcards.create', { deckId: deck.id }) }}">Créer une nouvelle FlashCard</a>
 
-          <button type="submit" style="border:none;background:transparent;cursor:pointer;">
-            <img height="20em" src="/img/delete.png" alt="delete" />
-          </button>
-        </form>
+            <!-- Jouer -->
+            <a href="{{ route('decks.play', { id: deck.id }) }}">Jouer</a>
 
-
-        <!-- DETAIL -->
-        <a href="{{ route('decks.show', { id: deck.id }) }}">
-          <img height="20em" src="/img/detail.png" alt="detail" />
-        </a>
-      </td>
-    </tr>
-    @endeach
+            <!-- Publier / Dépublier -->
+            @if(deck.isPublished)
+              <form
+                action="{{ route('decks.unpublish', { id: deck.id }) }}"
+                method="post"
+                style="display:inline;"
+              >
+                {{ csrfField() }}
+                <button type="submit">Dépublier</button>
+              </form>
+            @else
+              <form
+                action="{{ route('decks.publish', { id: deck.id }) }}"
+                method="post"
+                style="display:inline;"
+              >
+                {{ csrfField() }}
+                <button type="submit">Publier</button>
+              </form>
+            @endif
+          </td>
+        </tr>
+      @endeach
     @endif
   </tbody>
 </table>
