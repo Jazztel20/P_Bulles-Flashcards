@@ -33,6 +33,6 @@ router.get('/decks/:deckId/flashcards/create', [FlashcardsController, 'create'])
 router.post('/decks/:deckId/flashcards', [FlashcardsController, 'store']).as('flashcards.store')
 
 router.get('/decks/:deckId/flashcards/:id/edit', [FlashcardsController, 'edit']).as('flashcards.edit')
-router.put('/decks/:deckId/flashcards/:id', [FlashcardsController, 'update']).as('flashcards.update')
+router.post('/decks/:deckId/flashcards/:id/update', [FlashcardsController, 'update']).as('flashcards.updatePost')
 
-router.delete('/decks/:deckId/flashcards/:id', [FlashcardsController, 'destroy']).as('flashcards.destroy')
+router.post('/decks/:deckId/flashcards/:id/delete', [FlashcardsController, 'destroy']).as('flashcards.destroyPost')
