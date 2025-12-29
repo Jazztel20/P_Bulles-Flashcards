@@ -1,0 +1,11 @@
+@component('components/layout', { title: 'Jouer' })
+  <h3>Jouer — {{ deck.title }}</h3>
+
+  @if(deck.flashcards.length === 0)
+    <p>Ce deck ne contient aucune carte.</p>
+  @else
+    <p>Mode jeu à venir. Nombre de cartes : {{ deck.flashcards.length }}</p>
+  @endif
+
+  <p><a href="{{ route('decks.index') }}">Retour</a></p>
+@endcomponent
