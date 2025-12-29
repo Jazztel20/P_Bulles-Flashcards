@@ -1,0 +1,30 @@
+@component('components/layout', { title: 'Inscription' })
+
+  <h3>Inscription</h3>
+
+  @if(flashMessages.get('error'))
+    <p class="error">{{ flashMessages.get('error') }}</p>
+  @endif
+
+  <form action="{{ route('auth.handleSignup') }}" method="post">
+    {{ csrfField() }}
+
+    <div>
+      <label for="username">Nom d’utilisateur</label>
+      <input id="username" name="username" type="text" required value="{{ old('username') || '' }}" />
+    </div>
+
+    <div>
+      <label for="password">Mot de passe</label>
+      <input id="password" name="password" type="password" required />
+    </div>
+
+    <div>
+      <label for="passwordConfirm">Confirmation</label>
+      <input id="passwordConfirm" name="passwordConfirm" type="password" required />
+    </div>
+
+    <button type="submit" class="btn btn-login">S’enregistrer</button>
+  </form>
+
+@endcomponent
