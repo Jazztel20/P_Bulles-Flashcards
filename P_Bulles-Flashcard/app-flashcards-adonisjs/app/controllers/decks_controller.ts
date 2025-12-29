@@ -71,4 +71,25 @@ export default class DecksController {
     await deck.delete()
     return response.redirect('/')
   }
+
+  public async publish({ params, response }: HttpContext) {
+  const deck = await Deck.findOrFail(params.id)
+  deck.isPublished = true
+  await deck.save()
+  return response.redirect().toRoute('decks.index')
+}
+
+public async unpublish({ params, response }: HttpContext) {
+  const deck = await Deck.findOrFail(params.id)
+  deck.isPublished = false
+  await deck.save()
+  return response.redirect().toRoute('decks.index')
+}
+
+public async play({ params, view }: HttpContext) {
+  const deck = await Deck.findOrFail(params.id)
+  await deck.load('flashcards') 
+  return view.render('pages/decks/play', { deck })
+}
+
 }
