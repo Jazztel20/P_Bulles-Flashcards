@@ -6,16 +6,13 @@ export default class DecksController {
   /**
    * Display the list of the decks
    */
-  public async index({ view }: HttpContext) {
+  public async index({ view, auth }: HttpContext) {
     const decks = await Deck.query().orderBy('title', 'asc')
-    return view.render('pages/home', { decks })
+    return view.render('pages/home', { decks, auth })
   }
 
-  /**
-   * Display form to create a new record
-   */
-  public async create({ view }: HttpContext) {
-    return view.render('pages/decks/create')
+  public async create({ view, auth }: HttpContext) {
+    return view.render('pages/decks/create', { auth })
   }
 
   /**
@@ -36,17 +33,15 @@ export default class DecksController {
   /**
    * Show individual record
    */
-  public async show({ params, view }: HttpContext) {
+
+  public async show({ params, view, auth }: HttpContext) {
     const deck = await Deck.findOrFail(params.id)
-    return view.render('pages/decks/show', { deck })
+    return view.render('pages/decks/show', { deck, auth })
   }
 
-  /**
-   * Edit individual record
-   */
-  public async edit({ params, view }: HttpContext) {
+  public async edit({ params, view, auth }: HttpContext) {
     const deck = await Deck.findOrFail(params.id)
-    return view.render('pages/decks/edit', { deck })
+    return view.render('pages/decks/edit', { deck, auth })
   }
 
   /**
@@ -73,23 +68,22 @@ export default class DecksController {
   }
 
   public async publish({ params, response }: HttpContext) {
-  const deck = await Deck.findOrFail(params.id)
-  deck.isPublished = true
-  await deck.save()
-  return response.redirect().toRoute('decks.index')
-}
+    const deck = await Deck.findOrFail(params.id)
+    deck.isPublished = true
+    await deck.save()
+    return response.redirect().toRoute('decks.index')
+  }
 
-public async unpublish({ params, response }: HttpContext) {
-  const deck = await Deck.findOrFail(params.id)
-  deck.isPublished = false
-  await deck.save()
-  return response.redirect().toRoute('decks.index')
-}
+  public async unpublish({ params, response }: HttpContext) {
+    const deck = await Deck.findOrFail(params.id)
+    deck.isPublished = false
+    await deck.save()
+    return response.redirect().toRoute('decks.index')
+  }
 
-public async play({ params, view }: HttpContext) {
-  const deck = await Deck.findOrFail(params.id)
-  await deck.load('flashcards') 
-  return view.render('pages/decks/play', { deck })
-}
-
+  public async play({ params, view, auth }: HttpContext) {
+    const deck = await Deck.findOrFail(params.id)
+    await deck.load('flashcards')
+    return view.render('pages/decks/play', { deck, auth })
+  }
 }
