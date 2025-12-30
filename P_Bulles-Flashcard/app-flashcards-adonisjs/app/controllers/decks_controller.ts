@@ -10,7 +10,7 @@ export default class DecksController {
     const query = Deck.query().orderBy('title', 'asc')
     // Invité uniquement les decks publiés
     if (!auth.user) {
-      query.where('is_publihed', true)
+      query.where('is_published', true)
     }
     // User connecté non admin voit uniquement ses decks
     else if (!auth.user.isAdmin) {
