@@ -33,12 +33,17 @@
   margin: 10px 0;
 }
 
-.inline-form {
-  display: inline-block;
+.inline-form,
+.logout-form {
   margin: 0;
 }
 
-.link-btn {
+.inline-form {
+  display: inline-block;
+}
+
+.link-btn,
+.btn-signup {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -70,6 +75,11 @@
   border: none;
 }
 
+.containerOptions {
+  white-space: nowrap;
+}
+
+.containerOptions a,
 .action-link {
   padding: 0.35em 0.7em;
   border-radius: 6px;
@@ -80,12 +90,16 @@
   display: inline-block;
 }
 
+.containerOptions a:hover,
 .action-link:hover {
   opacity: 0.85;
 }
 
-.containerOptions {
-  white-space: nowrap;
+.containerOptions button {
+  padding: 0.35em 0.7em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
 }
 
 .containerOptions a,
@@ -96,25 +110,6 @@
   margin-left: 1vw;
   display: inline-block;
   vertical-align: middle;
-}
-
-.containerOptions a {
-  padding: 0.35em 0.7em;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: #f6f6f6;
-  color: #222;
-}
-
-.containerOptions a:hover {
-  opacity: 0.85;
-}
-
-.containerOptions button {
-  padding: 0.35em 0.7em;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  cursor: pointer;
 }
 
 body {
@@ -162,12 +157,6 @@ td {
   border-bottom: #ddd solid 1px;
 }
 
-.user-head a {
-  text-decoration: none;
-  height: 100%;
-  margin-left: 1vw;
-}
-
 .user-head {
   width: 100%;
   display: flex;
@@ -213,13 +202,18 @@ label {
   display: flex;
   justify-content: end;
   align-items: center;
-  gap: 10px; 
+  gap: 10px;
+}
+
+.login-user {
+  white-space: nowrap;
+  margin-right: 1vw;
 }
 
 .login-container form {
   display: flex;
   justify-content: space-between;
-  gap: 10px; 
+  gap: 10px;
 }
 
 .login-container label {
@@ -234,6 +228,12 @@ label {
   border-radius: 8px;
 }
 
+.login-container input {
+  height: 4em;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
 .login-container h3 {
   display: inline-block;
   width: 30%;
@@ -241,14 +241,9 @@ label {
   margin-right: 1vw;
 }
 
-.login-container input {
-  height: 4em;
-  margin-bottom: auto;
-  margin-top: auto;
-}
-
-.btn-login {
-  background-color: #00b4cc;
+.login-container .logout-form .btn-logout {
+  width: auto;
+  padding: 0 1em;
 }
 
 .btn {
@@ -263,6 +258,10 @@ label {
 
 .btn:hover {
   opacity: 0.8;
+}
+
+.btn-login {
+  background-color: #00b4cc;
 }
 
 .btn-logout {
