@@ -1,26 +1,29 @@
 @component('components/layout', { title: 'Modifier un deck' })
-
 <h3>Modifier un deck</h3>
 
 <form action="{{ route('decks.updatePost', { id: deck.id }) }}" method="post">
-    {{ csrfField() }}
-    <input type="hidden" name="_method" value="PUT" />
+  {{ csrfField() }}
 
-    <div>
-        <label for="title">Titre</label>
-        <input id="title" name="title" type="text" value="{{ deck.title }}" required />
-    </div>
+  <div class="field">
+    <label for="title">Titre</label>
+    <input id="title" name="title" type="text" value="{{ old('title') || deck.title }}" required />
+    @if(flashMessages.has('errors.title'))
+      <p class="error">Le titre doit contenir entre 3 et 100 caractères.</p>
+    @endif
+  </div>
 
-    <div>
-        <label for="description">Description</label>
-        <textarea id="description" name="description">{{ deck.description }}</textarea>
-    </div>
+  <div class="field">
+    <label for="description">Description</label>
+    <textarea id="description" name="description">{{ old('description') || deck.description || '' }}</textarea>
+    @if(flashMessages.has('errors.description'))
+      <p class="error">La description ne peut pas dépasser 255 caractères.</p>
+    @endif
+  </div>
 
-    <button type="submit">Enregistrer</button>
+  <button type="submit" class="btn-action btn-action-primary">Enregistrer</button>
 </form>
 
-<p>
-<a href="{{ route('home') }}">Retour</a>
-</p>
-
+<div class="user-footer">
+  <a class="action-link" href="{{ route('home') }}">Retour</a>
+</div>
 @endcomponent

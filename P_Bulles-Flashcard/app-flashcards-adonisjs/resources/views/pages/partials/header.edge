@@ -10,14 +10,14 @@
           Connecté : <strong>{{ auth.user.username }}</strong>
         </span>
 
-        <form action="{{ route('auth.handleLogout') }}" method="post" style="display:inline;">
+        <form action="{{ route('auth.handleLogout') }}" method="post" class="inline-form">
           {{ csrfField() }}
           <button type="submit" class="btn btn-login">
             Se déconnecter
           </button>
         </form>
       @else
-        <form action="{{ route('auth.handleLogin') }}" method="post" style="display:inline;">
+        <form action="{{ route('auth.handleLogin') }}" method="post" class="inline-form">
           {{ csrfField() }}
 
           <label for="username"></label>
@@ -31,7 +31,7 @@
           </button>
         </form>
 
-        <a href="{{ route('auth.signup') }}" class="btn btn-login" style="text-decoration:none;">
+        <a href="{{ route('auth.signup') }}" class="btn btn-login link-btn">
           S’enregistrer
         </a>
       @endif

@@ -3,9 +3,9 @@
 <h3>Cartes — {{ deck.title }}</h3>
 
 <p>
-  <a href="{{ route('flashcards.create', { deckId: deck.id }) }}">+ Ajouter une carte</a>
+  <a class="action-link" href="{{ route('flashcards.create', { deckId: deck.id }) }}">+ Ajouter une carte</a>
   |
-  <a href="{{ route('home') }}">Retour aux decks</a>
+  <a class="action-link" href="{{ route('home') }}">Retour aux decks</a>
 </p>
 
 @if(deck.flashcards.length === 0)
@@ -26,7 +26,7 @@
           <td>{{ card.question }}</td>
           <td>{{ card.answer }}</td>
 
-          <td>
+          <td class="containerOptions">
             <!-- EDIT (GET) -->
             <a href="{{ route('flashcards.edit', { deckId: deck.id, id: card.id }) }}">Modifier</a>
 
@@ -34,11 +34,11 @@
             <form
               action="{{ route('flashcards.destroyPost', { deckId: deck.id, id: card.id }) }}"
               method="post"
-              style="display:inline;"
+              class="inline-form"
               onsubmit="return confirm('Supprimer cette carte ?');"
             >
               {{ csrfField() }}
-              <button type="submit">Supprimer</button>
+              <button type="submit" class="btn-action btn-action-danger">Supprimer</button>
             </form>
           </td>
         </tr>

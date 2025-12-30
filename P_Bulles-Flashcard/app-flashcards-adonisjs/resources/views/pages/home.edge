@@ -5,7 +5,7 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>Title</th>
+      <th>Titre</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -16,53 +16,38 @@
         <td colspan="3">Aucun deck pour le moment.</td>
       </tr>
     @else
+      @let(index = 1)
       @each(deck in decks)
         <tr>
-          <td>{{ i }}</td>
+          <td>{{ index }}</td>
           <td>{{ deck.title }}</td>
-          
-          <td>
-            <!-- Modifier -->
+
+          <td class="containerOptions">
             <a href="{{ route('decks.edit', { id: deck.id }) }}">Modifier</a>
 
-            <!-- Supprimer -->
             <form
               action="{{ route('decks.destroyPost', { id: deck.id }) }}"
               method="post"
-              style="display:inline;"
+              class="inline-form"
               onsubmit="return confirm('Supprimer ce deck ?');"
             >
               {{ csrfField() }}
-              <button type="submit">Supprimer</button>
+              <button type="submit" class="btn-action btn-action-danger">Supprimer</button>
             </form>
 
-            <!-- Voir la liste des flashcards -->
-            <a href="{{ route('flashcards.index', { deckId: deck.id }) }}">Voir la liste des FlashCards</a>
-
-            <!-- Créer une nouvelle flashcard -->
-            <a href="{{ route('flashcards.create', { deckId: deck.id }) }}">Créer une nouvelle FlashCard</a>
-
-            <!-- Jouer -->
+            <a href="{{ route('flashcards.index', { deckId: deck.id }) }}">Voir les flashcards</a>
+            <a href="{{ route('flashcards.create', { deckId: deck.id }) }}">Créer une flashcard</a>
             <a href="{{ route('decks.play', { id: deck.id }) }}">Jouer</a>
 
-            <!-- Publier / Dépublier -->
             @if(deck.isPublished)
-              <form
-                action="{{ route('decks.unpublish', { id: deck.id }) }}"
-                method="post"
-                style="display:inline;"
-              >
+              <form action="{{ route('decks.unpublish', { id: deck.id }) }}" method="post" class="inline-form">
                 {{ csrfField() }}
-                <button type="submit">Dépublier</button>
+                <button type="submit" class="btn-action">Dépublier</button>
               </form>
             @else
-              <form
-                action="{{ route('decks.publish', { id: deck.id }) }}"
-                method="post"
-                style="display:inline;"
-              >
+              <form action="{{ route('decks.publish', { id: deck.id }) }}" method="post" class="inline-form">
                 {{ csrfField() }}
-                <button type="submit">Publier</button>
+                <button type="submit" class="btn-action btn-action-primary">Publier</button>
               </form>
             @endif
           </td>

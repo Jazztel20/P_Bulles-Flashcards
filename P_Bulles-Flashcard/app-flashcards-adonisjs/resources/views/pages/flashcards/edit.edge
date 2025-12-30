@@ -1,25 +1,23 @@
 @component('components/layout', { title: 'Modifier une flashcard' })
-
 <h3>Modifier une flashcard — {{ deck.title }}</h3>
 
 <form action="{{ route('flashcards.updatePost', { deckId: deck.id, id: card.id }) }}" method="post">
   {{ csrfField() }}
 
-  <div>
+  <div class="field">
     <label for="question">Question</label>
-    <textarea id="question" name="question">{{ card.question }}</textarea>
+    <textarea id="question" name="question">{{ old('question') || card.question }}</textarea>
   </div>
 
-  <div>
+  <div class="field">
     <label for="answer">Réponse</label>
-    <textarea id="answer" name="answer">{{ card.answer }}</textarea>
+    <textarea id="answer" name="answer">{{ old('answer') || card.answer }}</textarea>
   </div>
 
-  <button type="submit">Enregistrer</button>
+  <button type="submit" class="btn-action btn-action-primary">Enregistrer</button>
 </form>
 
-<p>
-  <a href="{{ route('flashcards.index', { deckId: deck.id }) }}">Retour</a>
-</p>
-
+<div class="user-footer">
+  <a class="action-link" href="{{ route('flashcards.index', { deckId: deck.id }) }}">Retour</a>
+</div>
 @endcomponent

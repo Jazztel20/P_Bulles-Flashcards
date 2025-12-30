@@ -19,7 +19,7 @@ flashMessages.has('errors.description')
 <form action="{{ route('decks.store') }}" method="post">
   {{ csrfField() }}
 
-  <div>
+  <div class="field">
     <label for="title">Titre</label>
     <input type="text" id="title" name="title" value="{{ old('title') || '' }}" required />
 
@@ -29,7 +29,7 @@ flashMessages.has('errors.description')
     @endif
   </div>
 
-  <div>
+  <div class="field">
     <label for="description">Description</label>
     <textarea id="description" name="description">{{ old('description') || '' }}</textarea>
 
@@ -39,7 +39,7 @@ flashMessages.has('errors.description')
     @endif
   </div>
 
-  <button type="submit">
+  <button type="submit" class="btn-action btn-action-primary">
     Créer le deck
   </button>
 </form>
