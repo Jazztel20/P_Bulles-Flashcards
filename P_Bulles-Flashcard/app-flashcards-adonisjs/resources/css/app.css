@@ -1,3 +1,122 @@
+.field {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.radio {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+
+.text-danger,
+.error {
+  color: red;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 15px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 4px;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.inline-form {
+  display: inline-block;
+  margin: 0;
+}
+
+.link-btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-action {
+  padding: 0.35em 0.7em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: #f6f6f6;
+  color: #222;
+}
+
+.btn-action:hover {
+  opacity: 0.85;
+}
+
+.btn-action-primary {
+  background-color: #00b4cc;
+  color: white;
+  border: none;
+}
+
+.btn-action-danger {
+  background-color: coral;
+  color: white;
+  border: none;
+}
+
+.action-link {
+  padding: 0.35em 0.7em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #f6f6f6;
+  color: #222;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.action-link:hover {
+  opacity: 0.85;
+}
+
+.containerOptions {
+  white-space: nowrap;
+}
+
+.containerOptions a,
+.containerOptions form,
+.user-head a {
+  text-decoration: none;
+  height: 100%;
+  margin-left: 1vw;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.containerOptions a {
+  padding: 0.35em 0.7em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #f6f6f6;
+  color: #222;
+}
+
+.containerOptions a:hover {
+  opacity: 0.85;
+}
+
+.containerOptions button {
+  padding: 0.35em 0.7em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
 body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   margin: auto;
@@ -8,6 +127,17 @@ nav {
   border: black solid 3px;
   background-color: #e5e5e5;
   text-align: center;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0.6em 1em;
+  text-decoration: none;
+  color: #111;
+}
+
+nav a:hover {
+  opacity: 0.8;
 }
 
 .container {
@@ -32,7 +162,6 @@ td {
   border-bottom: #ddd solid 1px;
 }
 
-.containerOptions a,
 .user-head a {
   text-decoration: none;
   height: 100%;
@@ -49,6 +178,7 @@ td {
 
 .user-footer {
   text-align: right;
+  margin-top: 10px;
 }
 
 .left,
@@ -83,11 +213,13 @@ label {
   display: flex;
   justify-content: end;
   align-items: center;
+  gap: 10px; 
 }
 
 .login-container form {
   display: flex;
   justify-content: space-between;
+  gap: 10px; 
 }
 
 .login-container label {
