@@ -7,8 +7,18 @@ export default class DecksController {
    * Display the list of the decks
    */
   public async index({ view, auth }: HttpContext) {
-    const decks = await Deck.query().orderBy('title', 'asc')
-    return view.render('pages/home', { decks, auth })
+        const query = Deck.query().orderBy('title', 'asc')
+        // Invité uniquement les decks publiés
+        if (!auth.user) {
+          query.where('is_publihed', true)
+        }
+        // User connecté non admin voit uniquement ses decks
+        else if (!auth.user.isAdmin) {
+          query.where('user_id', auth.user.id)
+        }
+        // User connecté admin voit tout
+        const decks = await query
+        return view.render('pages/home', { decks, auth})
   }
 
   public async create({ view, auth }: HttpContext) {
@@ -18,13 +28,14 @@ export default class DecksController {
   /**
    * Handle form submission for the create action
    */
-  public async store({ request, response }: HttpContext) {
+  public async store({ request, response, auth }: HttpContext) {
     const data = await request.validateUsing(deckValidator)
 
     await Deck.create({
       title: data.title,
       description: data.description ?? null,
       isPublished: false,
+      userId: auth.user!.id,
     })
 
     return response.redirect('/')
