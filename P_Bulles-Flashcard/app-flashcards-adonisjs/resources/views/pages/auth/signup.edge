@@ -1,8 +1,12 @@
 @component('components/layout', { title: 'Inscription' })
 <h3>Inscription</h3>
 
-@if(flashMessages.get('error'))
-  <p class="error">{{ flashMessages.get('error') }}</p>
+@if(
+  flashMessages.has('errors.username') ||
+  flashMessages.has('errors.password') ||
+  flashMessages.has('errors.passwordConfirm')
+)
+  <p class="error">Veuillez corriger les erreurs ci-dessous.</p>
 @endif
 
 <form action="{{ route('auth.handleSignup') }}" method="post">
@@ -10,17 +14,32 @@
 
   <div class="field">
     <label for="username">Nom d’utilisateur</label>
-    <input id="username" name="username" type="text" required value="{{ old('username') || '' }}" />
+    <input
+      id="username"
+      name="username"
+      type="text"
+      required
+      value="{{ old('username') || '' }}"
+    />
+    @if(flashMessages.has('errors.username'))
+      <p class="error">{{ flashMessages.get('errors.username') }}</p>
+    @endif
   </div>
 
   <div class="field">
     <label for="password">Mot de passe</label>
     <input id="password" name="password" type="password" required />
+    @if(flashMessages.has('errors.password'))
+      <p class="error">{{ flashMessages.get('errors.password') }}</p>
+    @endif
   </div>
 
   <div class="field">
     <label for="passwordConfirm">Confirmation</label>
     <input id="passwordConfirm" name="passwordConfirm" type="password" required />
+    @if(flashMessages.has('errors.passwordConfirm'))
+      <p class="error">{{ flashMessages.get('errors.passwordConfirm') }}</p>
+    @endif
   </div>
 
   <button type="submit" class="btn btn-login">S’enregistrer</button>
