@@ -1,31 +1,50 @@
 import Deck from '#models/deck'
 import Flashcard from '#models/flashcard'
-import { flashcardValidator } from '#validators/flashcard_validator'
+import { flashcardValidator, flashcardMessagesProvider } from '#validators/flashcard_validator'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class FlashcardsController {
   /**
    * Display a list of resource
    */
-  public async index({ params, view, auth }: HttpContext) {
+  public async index({ params, view, auth, session, response }: HttpContext) {
     const deck = await Deck.findOrFail(params.deckId)
+
+    if (!auth.user!.isAdmin && deck.userId !== auth.user!.id) {
+      session.flash('error', 'Accès interdit.')
+      return response.redirect().toRoute('home')
+    }
+
     await deck.load('flashcards')
     return view.render('pages/flashcards/index', { deck, auth })
   }
 
-  public async create({ params, view, auth }: HttpContext) {
+  public async create({ params, view, auth, session, response }: HttpContext) {
     const deck = await Deck.findOrFail(params.deckId)
+
+    if (!auth.user!.isAdmin && deck.userId !== auth.user!.id) {
+      session.flash('error', 'Accès interdit.')
+      return response.redirect().toRoute('home')
+    }
+
     return view.render('pages/flashcards/create', { deck, auth })
   }
 
   /**
    * Handle form submission for the create action
    */
-  public async store({ params, request, response }: HttpContext) {
+  public async store({ params, request, response, auth, session }: HttpContext) {
     const deck = await Deck.findOrFail(params.deckId)
-    const data = await request.validateUsing(flashcardValidator)
 
-    // position auto (optionnel mais utile)
+    if (!auth.user!.isAdmin && deck.userId !== auth.user!.id) {
+      session.flash('error', 'Accès interdit.')
+      return response.redirect().toRoute('home')
+    }
+
+    const data = await request.validateUsing(flashcardValidator, {
+      messagesProvider: flashcardMessagesProvider,
+    })
+
     const lastCard = await Flashcard.query()
       .where('deck_id', deck.id)
       .orderBy('position', 'desc')
@@ -47,8 +66,13 @@ export default class FlashcardsController {
    * Edit individual record
    */
 
-  public async edit({ params, view, auth }: HttpContext) {
+  public async edit({ params, view, auth, session, response }: HttpContext) {
     const deck = await Deck.findOrFail(params.deckId)
+
+    if (!auth.user!.isAdmin && deck.userId !== auth.user!.id) {
+      session.flash('error', 'Accès interdit.')
+      return response.redirect().toRoute('home')
+    }
 
     const card = await deck.related('flashcards').query().where('id', params.id).firstOrFail()
 
@@ -58,15 +82,22 @@ export default class FlashcardsController {
   /**
    * Handle form submission for the edit action
    */
-  public async update({ params, request, response }: HttpContext) {
+  public async update({ params, request, response, auth, session }: HttpContext) {
     const deck = await Deck.findOrFail(params.deckId)
+
+    if (!auth.user!.isAdmin && deck.userId !== auth.user!.id) {
+      session.flash('error', 'Accès interdit.')
+      return response.redirect().toRoute('home')
+    }
 
     const card = await Flashcard.query()
       .where('id', params.id)
       .andWhere('deck_id', deck.id)
       .firstOrFail()
 
-    const data = await request.validateUsing(flashcardValidator)
+    const data = await request.validateUsing(flashcardValidator, {
+      messagesProvider: flashcardMessagesProvider,
+    })
 
     card.question = data.question
     card.answer = data.answer
@@ -79,8 +110,13 @@ export default class FlashcardsController {
    * Delete record
    */
 
-  public async destroy({ params, response }: HttpContext) {
+  public async destroy({ params, response, auth, session }: HttpContext) {
     const deck = await Deck.findOrFail(params.deckId)
+
+    if (!auth.user!.isAdmin && deck.userId !== auth.user!.id) {
+      session.flash('error', 'Accès interdit.')
+      return response.redirect().toRoute('home')
+    }
 
     const card = await Flashcard.query()
       .where('id', params.id)
@@ -88,6 +124,7 @@ export default class FlashcardsController {
       .firstOrFail()
 
     await card.delete()
+
     return response.redirect().toRoute('flashcards.index', { deckId: deck.id })
   }
 }
