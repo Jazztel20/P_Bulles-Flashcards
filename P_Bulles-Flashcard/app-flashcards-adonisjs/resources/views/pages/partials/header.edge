@@ -6,18 +6,18 @@
 
     <div class="login-container">
       @if(auth.user)
-        <span>
+        <span class="login-user">
           Connecté : <strong>{{ auth.user.username }}</strong>
         </span>
 
-        <form action="{{ route('auth.handleLogout') }}" method="post" class="inline-form">
+        <form action="{{ route('auth.handleLogout') }}" method="post" class="logout-form">
           {{ csrfField() }}
-          <button type="submit" class="btn btn-login">
+          <button type="submit" class="btn btn-logout">
             Se déconnecter
           </button>
         </form>
       @else
-        <form action="{{ route('auth.handleLogin') }}" method="post" class="inline-form">
+        <form action="{{ route('auth.handleLogin') }}" method="post" class="login-form">
           {{ csrfField() }}
 
           <label for="username"></label>
@@ -31,7 +31,7 @@
           </button>
         </form>
 
-        <a href="{{ route('auth.signup') }}" class="btn btn-login link-btn">
+        <a href="{{ route('auth.signup') }}" class="btn btn-login btn-signup">
           S’enregistrer
         </a>
       @endif
