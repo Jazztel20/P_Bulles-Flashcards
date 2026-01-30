@@ -60,7 +60,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: "FlashCards-maenau"
+          app-name: "Flashcards-matden"
           slot-name: "Production"
           package: . # Ici '.' correspond maintenant au contenu de build/
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C40DA6533DAD4682B6CA38C131AB2E9F }}
