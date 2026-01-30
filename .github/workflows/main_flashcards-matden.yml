@@ -42,7 +42,7 @@ jobs:
           name: node-app
           # On n'envoie que le CONTENU du dossier build
           # Ainsi, bin/server.js sera à la racine de wwwroot sur Azure
-          path: app-flashcards-adonisjs/build/
+          path: P_Bulles-Flashcard/app-flashcards-adonisjs/build/
 
   deploy:
     runs-on: ubuntu-latest
