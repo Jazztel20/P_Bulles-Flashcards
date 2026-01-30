@@ -3,7 +3,7 @@ name: Build and deploy Node.js app to Azure Web App - FlashCards-maenau
 on:
   push:
     branches:
-      - deploy-to-azure
+      - main
   workflow_dispatch:
 
 jobs:
