@@ -26,13 +26,13 @@ jobs:
       - name: Build project
         run: |
           cd P_Bulles-Flashcard
-          cd app-flashcards
+          cd app-flashcards-adonisjs
           node ace build
 
       - name: Prepare Deployment Folder
         run: |
           cd P_Bulles-Flashcard
-          cd app-flashcards
+          cd app-flashcards-adonisjs
           cd build
           npm ci --omit=dev
 
@@ -42,7 +42,7 @@ jobs:
           name: node-app
           # On n'envoie que le CONTENU du dossier build
           # Ainsi, bin/server.js sera à la racine de wwwroot sur Azure
-          path: app-flashcards/build/
+          path: app-flashcards-adonisjs/build/
 
   deploy:
     runs-on: ubuntu-latest
